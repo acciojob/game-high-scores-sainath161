@@ -25,13 +25,15 @@ function saveScore() {
 // Show scores in div
 function showScores() {
   // complete the code
-	const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-
-  if (highScores.length === 0) {
-    scores.innerHTML = "No scores yet";
+	const storedScores = localStorage.getItem("scores");
+  if (!storedScores) {
+    scores.innerHTML = "No scores yet!";
     return;
   }
-	let tableHTML = "<table><tr><th>Name</th><th>Score</th></tr>";
+
+  const highScores = JSON.parse(storedScores);
+
+  let tableHTML = "<table><tr><th>Name</th><th>Score</th></tr>";
   highScores.forEach(entry => {
     tableHTML += `<tr><td>${entry.name}</td><td>${entry.score}</td></tr>`;
   });
