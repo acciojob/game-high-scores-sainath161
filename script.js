@@ -17,21 +17,21 @@ function saveScore() {
   let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
   highScores.push({ name, score });
-	highScores.sort((a, b) => b.score - a.score);
-	localStorage.setItem("highScores", JSON.stringify(highScores));
+  highScores.sort((a, b) => b.score - a.score);
+
+  localStorage.setItem("highScores", JSON.stringify(highScores));
   showScores();
 }
 
 // Show scores in div
 function showScores() {
   // complete the code
-	const storedScores = localStorage.getItem("scores");
-  if (!storedScores) {
-    scores.innerHTML = "No scores yet!";
+	const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
+  if (highScores.length === 0) {
+    scores.innerHTML = "No scores yet";
     return;
   }
-
-  const highScores = JSON.parse(storedScores);
 
   let tableHTML = "<table><tr><th>Name</th><th>Score</th></tr>";
   highScores.forEach(entry => {
@@ -41,3 +41,5 @@ function showScores() {
 
   scores.innerHTML = tableHTML;
 }
+
+showScores();
